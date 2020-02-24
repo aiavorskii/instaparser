@@ -7,6 +7,8 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class FollowersCounterScrapperController extends ScrapperController
 {
+    const INSTAGRAM_URL = 'https://www.instagram.com/';
+
     public function form()
     {
         return view('form.form-counter', ['action' => '/scrapper/followers']);
@@ -32,11 +34,13 @@ class FollowersCounterScrapperController extends ScrapperController
 
     protected function getParseParam($request)
     {
-        $url = $request->request->get('profile');
+        $profileID = $request->request->get('profile');
 
-        if (!$url) {
+        if (!$profileID) {
             throw new IncorrectParameterException();
         }
+
+        $url = self::INSTAGRAM_URL . $profileID;
 
         return $url;
     }
