@@ -32,7 +32,9 @@ class ProfileScrapperController extends ScrapperController
         $data = array_filter($data);
         $data = array_unique($data);
 
-        return $data;
+        $returnData = ["instagram" => array_values($data)];
+
+        return $returnData;
     }
 
     protected function getParseParam($request)
